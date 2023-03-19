@@ -83,7 +83,7 @@ def draw_ellipse(position, covariance, ax=None, **kwargs):
     for nsig in range(1, 4):
         ax.add_patch(Ellipse(position, nsig * width, nsig * height, angle, **kwargs))
  
-def GMM_and_plot_accord_phone(x_path,y_path,n_class,plt_c):
+def GMM_and_plot_accord_phone(x_path,y_path,n_class,plt_c,perplexity=30):
     """
     function：使用准备好的x和y训练sklearn中的GMM模型，并可视化
     para：
@@ -99,7 +99,7 @@ def GMM_and_plot_accord_phone(x_path,y_path,n_class,plt_c):
     x=np.load(x_path) # (99,80)
     y=np.load(y_path) # (99,)
     
-    X_tsne = TSNE(n_components=2,perplexity=30).fit_transform(x)  # (99,2) 
+    X_tsne = TSNE(n_components=2,perplexity=perplexity).fit_transform(x)  # (99,2) 
     x_min, x_max = X_tsne.min(0), X_tsne.max(0)
     X_norm = (X_tsne-x_min)/(x_max-x_min)  # (99,2) 
     
